@@ -22,7 +22,7 @@ export default class ChildComponent extends React.Component {
    * 当有需要从props中派生出state的时候可以用到此函数，
    * 一般不常用
    */
-  static getDerivedStateFromProps() {
+  static getDerivedStateFromProps(props, state) {
     console.log("getDerivedStateFromProps：用来从props派生state");
     return null;
   }
@@ -84,8 +84,8 @@ export default class ChildComponent extends React.Component {
    * 会在更新后会被立即调用，
    * 可以在此函数中获取到当前页面最新的DOM节点
    */
-  componentDidUpdate() {
-    console.log("componentDidUpdate：组件已更新");
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("componentDidUpdate：组件已更新", snapshot);
   }
 
   /**
