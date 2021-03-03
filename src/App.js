@@ -1,25 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import FollowButton from "./components/FollowButton";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentId: "1",
+      userList: [
+        {
+          id: "1",
+          name: "张三",
+        },
+        {
+          id: "2",
+          name: "李四",
+        },
+        {
+          id: "3",
+          name: "王五",
+        },
+        {
+          id: "4",
+          name: "赵六",
+        },
+      ],
+    };
+  }
+
+  onUserChangeHandle = (event) => {
+    this.setState({
+      currentId: event.target.value,
+    });
+  };
+
+  render() {
+    const { currentId, userList } = this.state;
+    const user = userList.find((item) => item.id === currentId) || {};
+
+    console.log(user);
+
+    return (
+      <div style={{ padding: "10px" }}>
+        <select
+          style={{ marginRight: "10px" }}
+          value={currentId}
+          onChange={this.onUserChangeHandle}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          {userList.map((item) => {
+            return (
+              <option value={item.id} key={item.id}>
+                {item.name}
+              </option>
+            );
+          })}
+        </select>
+        <FollowButton user={user} />
+      </div>
+    );
+  }
 }
 
 export default App;
