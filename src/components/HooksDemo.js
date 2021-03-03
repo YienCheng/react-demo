@@ -1,9 +1,13 @@
 import React from "react";
 import useChangeText from "../hooks/useChangeText";
 import useClock from "../hooks/useClock";
-export default function HooksDemo(props) {
+
+export default function HooksDemo() {
+  // Change Text
   const { text, changeText } = useChangeText();
-  const date = useClock();
+
+  // Clock
+  const date = useClock(new Date());
 
   return (
     <div>
